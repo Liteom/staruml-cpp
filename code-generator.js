@@ -538,7 +538,7 @@ class CppCodeGenerator {
         docs += '\n@param ' + inputParam.name
       }
 
-      methodStr += ((returnTypeParam.length > 0) ? this.getMemberVariable(returnTypeParam[0]) : 'void') + ' '
+      methodStr += ((returnTypeParam.length > 0) ? this.getType(returnTypeParam[0]) : 'void') + ' '
 
       if (isCppBody) {
         var telem = elem
@@ -585,6 +585,8 @@ class CppCodeGenerator {
           methodStr += ' final'
         } else if (elem.isAbstract === true) { // TODO 만약 virtual 이면 모두 pure virtual? 체크 할것
           methodStr += ' = 0'
+        } else if (elem.isQuery == true) {
+          methodStr += ' const'
         }
         methodStr += ';'
       }
